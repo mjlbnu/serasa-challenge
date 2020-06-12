@@ -53,13 +53,15 @@ public class UploadController {
 
 				// convert `CsvToBean` object to list of notas
 				List<Nota> notas = csvToBean.parse();
-								
-				System.out.println(empresa.getId());
+				
+				for (Nota nota : notas) {
+					nota.setId_empresa(empresa.getId());
+				}
 
 				// save notas on db
 				notaService.gravarNotas(notas);
 
-				// save notas list on model
+				// save notas on list on model
 				model.addAttribute("notas", notas);
 				model.addAttribute("status", true);
 

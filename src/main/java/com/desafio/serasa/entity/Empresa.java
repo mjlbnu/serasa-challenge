@@ -20,13 +20,13 @@ public class Empresa {
 	@Column
 	@NotNull
 	@Size(max = 100, min = 1)
-	private Integer pontuacao;
+	private Float pontuacao;
 	
 	public Empresa() {
 	}
 
 	public Empresa(Long id, @NotNull @Size(max = 100) String nome,
-			@NotNull @Size(max = 100, min = 1) Integer pontuacao) {
+			@NotNull @Size(max = 100, min = 1) Float pontuacao) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -49,11 +49,11 @@ public class Empresa {
 		this.nome = nome;
 	}
 	
-	public Integer getPontuacao() {
+	public Float getPontuacao() {
 		return pontuacao;
 	}
 
-	public void setPontuacao(Integer pontuacao) {
+	public void setPontuacao(Float pontuacao) {
 		this.pontuacao = pontuacao;
 	}
 

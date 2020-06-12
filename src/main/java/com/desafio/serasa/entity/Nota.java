@@ -33,7 +33,6 @@ public class Nota {
 	@NotNull
 	private String tipoNota;
 	
-	@CsvBindByName
 	@NotNull
 	private Long id_empresa;
 	
