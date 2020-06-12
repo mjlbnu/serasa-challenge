@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Upload CSV File</title>
+
+    <!--Bootstrap 4-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container py-5">
+    <div class="row">
+        <div class="col-6 mx-auto">
+            <h1>Upload do arquivo CSV contendo as notas</h1>
+            <hr>
+            <form method="POST" th:action="@{/upload-notas}" enctype="multipart/form-data" th:object="${empresa}">
+            
+            	<div class="col-md-6 form-group">
+            		<label>Escolha a Empresa</label>
+            		<select class="form-control" th:field="*{id}">
+                		<option value="1">Empresa 1</option>
+                		<option value="2">Empresa 2</option>
+                		<option value="3">Empresa 3</option>
+            		</select>
+        		</div>
+            
+                <div class="form-group mt-3">
+                    <label for="file">Selecione o arquivo CSV contendo as notas</label>
+                    <input type="file" name="file" class="form-control-file" id="file" accept=".csv">
+                </div>
+                <button type="submit" class="btn btn-primary">Importar Notas</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
