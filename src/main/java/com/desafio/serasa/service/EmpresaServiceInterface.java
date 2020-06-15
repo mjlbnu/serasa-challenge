@@ -7,5 +7,7 @@ import com.desafio.serasa.entity.Empresa;
 public interface EmpresaServiceInterface {
 	
 	List<Empresa> listar();
+	
+	void calcularNotaEmpresa(Long id);
 
 }

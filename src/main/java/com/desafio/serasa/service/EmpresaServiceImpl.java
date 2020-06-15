@@ -20,4 +20,10 @@ public class EmpresaServiceImpl implements EmpresaServiceInterface {
 		return empresaRepository.findAll(Sort.by(Sort.Direction.DESC, "pontuacao"));
 	}
 
+	@Override
+	public void calcularNotaEmpresa(Long id) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

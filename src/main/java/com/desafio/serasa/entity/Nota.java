@@ -36,17 +36,20 @@ public class Nota {
 	@NotNull
 	private Long id_empresa;
 	
+	private String status = "PENDENTE";
+	
 	public Nota() {
 	}
 
 	public Nota(Long id, @NotNull Integer periodo, @NotNull Integer numeroNota, @NotNull String tipoNota,
-			@NotNull Long id_empresa) {
+			@NotNull Long id_empresa, String status) {
 		super();
 		this.id = id;
 		this.periodo = periodo;
 		this.numeroNota = numeroNota;
 		this.tipoNota = tipoNota;
 		this.id_empresa = id_empresa;
+		this.status = status;
 	}
 
 	public Long getId() {
@@ -87,6 +90,14 @@ public class Nota {
 
 	public void setId_empresa(Long id_empresa) {
 		this.id_empresa = id_empresa;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	@Override

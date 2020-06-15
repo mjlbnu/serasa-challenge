@@ -11,6 +11,7 @@ CREATE TABLE NOTAS(
 	numero_nota int not null,
 	tp_nota varchar(20) not null,
 	id_empresa bigint not null,
+	status varchar(20) not null,
 	primary key (id)
 );
 
@@ -22,13 +23,13 @@ INSERT INTO EMPRESA (nome, pontuacao) VALUES ('Empresa 3', 80.9);
 INSERT INTO EMPRESA (nome, pontuacao) VALUES ('Empresa 4', 55.2);
 INSERT INTO EMPRESA (nome, pontuacao) VALUES ('Empresa 5', 70.5);
 
-INSERT INTO NOTAS(periodo, numero_nota, tp_nota, id_empresa) VALUES(202001, 123, 'FISCAL', 1);
-INSERT INTO NOTAS(periodo, numero_nota, tp_nota, id_empresa) VALUES(202001, 456, 'FISCAL', 1);
-INSERT INTO NOTAS(periodo, numero_nota, tp_nota, id_empresa) VALUES(202001, 789, 'FISCAL', 1);
-INSERT INTO NOTAS(periodo, numero_nota, tp_nota, id_empresa) VALUES(202001, 621, 'DEBITO', 1);
-INSERT INTO NOTAS(periodo, numero_nota, tp_nota, id_empresa) VALUES(202001, 634, 'DEBITO', 1);
-INSERT INTO NOTAS(periodo, numero_nota, tp_nota, id_empresa) VALUES(202001, 665, 'DEBITO', 1);
-INSERT INTO NOTAS(periodo, numero_nota, tp_nota, id_empresa) VALUES(202001, 999, 'FISCAL', 2);
-INSERT INTO NOTAS(periodo, numero_nota, tp_nota, id_empresa) VALUES(202001, 888, 'FISCAL', 2);
-INSERT INTO NOTAS(periodo, numero_nota, tp_nota, id_empresa) VALUES(202001, 777, 'DEBITO', 2);
+INSERT INTO NOTAS(periodo, numero_nota, tp_nota, id_empresa, status) VALUES(202001, 123, 'FISCAL', 1, 'PENDENTE');
+INSERT INTO NOTAS(periodo, numero_nota, tp_nota, id_empresa, status) VALUES(202001, 456, 'FISCAL', 1, 'PENDENTE');
+INSERT INTO NOTAS(periodo, numero_nota, tp_nota, id_empresa, status) VALUES(202001, 789, 'FISCAL', 1, 'PENDENTE');
+INSERT INTO NOTAS(periodo, numero_nota, tp_nota, id_empresa, status) VALUES(202001, 621, 'DEBITO', 1, 'PENDENTE');
+INSERT INTO NOTAS(periodo, numero_nota, tp_nota, id_empresa, status) VALUES(202001, 634, 'DEBITO', 1, 'PENDENTE');
+INSERT INTO NOTAS(periodo, numero_nota, tp_nota, id_empresa, status) VALUES(202001, 665, 'DEBITO', 1, 'PENDENTE');
+INSERT INTO NOTAS(periodo, numero_nota, tp_nota, id_empresa, status) VALUES(202001, 999, 'FISCAL', 2, 'PENDENTE');
+INSERT INTO NOTAS(periodo, numero_nota, tp_nota, id_empresa, status) VALUES(202001, 888, 'FISCAL', 2, 'PENDENTE');
+INSERT INTO NOTAS(periodo, numero_nota, tp_nota, id_empresa, status) VALUES(202001, 777, 'DEBITO', 2, 'PENDENTE');
 
