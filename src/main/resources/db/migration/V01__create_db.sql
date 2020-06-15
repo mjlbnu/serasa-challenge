@@ -16,11 +16,11 @@ CREATE TABLE NOTAS(
 
 ALTER TABLE NOTAS ADD CONSTRAINT FK1 FOREIGN KEY (id_empresa) REFERENCES EMPRESA;
 
-INSERT INTO EMPRESA (nome, pontuacao) VALUES ('Empresa 1', 50.0);
-INSERT INTO EMPRESA (nome, pontuacao) VALUES ('Empresa 2', 50.0);
-INSERT INTO EMPRESA (nome, pontuacao) VALUES ('Empresa 3', 50.0);
-INSERT INTO EMPRESA (nome, pontuacao) VALUES ('Empresa 4', 50.0);
-INSERT INTO EMPRESA (nome, pontuacao) VALUES ('Empresa 5', 50.0);
+INSERT INTO EMPRESA (nome, pontuacao) VALUES ('Empresa 1', 20.2);
+INSERT INTO EMPRESA (nome, pontuacao) VALUES ('Empresa 2', 55.3);
+INSERT INTO EMPRESA (nome, pontuacao) VALUES ('Empresa 3', 80.9);
+INSERT INTO EMPRESA (nome, pontuacao) VALUES ('Empresa 4', 55.2);
+INSERT INTO EMPRESA (nome, pontuacao) VALUES ('Empresa 5', 70.5);
 
 INSERT INTO NOTAS(periodo, numero_nota, tp_nota, id_empresa) VALUES(202001, 123, 'FISCAL', 1);
 INSERT INTO NOTAS(periodo, numero_nota, tp_nota, id_empresa) VALUES(202001, 456, 'FISCAL', 1);

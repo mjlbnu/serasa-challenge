@@ -13,42 +13,35 @@
 <div class="container py-5">
     <div class="row">
         <div class="col-10 mx-auto">
-            <h1>Resultado da importação</h1>
+            <h1>Ranking de Empresas</h1>
             <!--display error if any-->
             <div class="alert alert-danger" role="alert" th:if="${!status}">
                 <strong>Error:</strong>
                 <span th:text="${message}"></span>
             </div>
-            
-            <div class="my-3">
-    			<p><strong>Id Empresa:</strong> <span th:text="${empresa.id}"></span></p>
-			</div>
 			
-            <!--mostra a lista de notas-->
+            <!--Lista de empresas-->
             <table class="table table-striped" th:if="${status}">
                 <thead>
                 <tr>
                     <th scope="col">Ranking</th>
-                    <th scope="col">Id Empresa</th>
-                    <th scope="col">Periodo</th>
-                    <th scope="col">Nr. Nota</th>
-                    <th scope="col">Tp. Nota</th>
+                    <th scope="col">Id</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Pontuação</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="nota, i : ${notas}">
+                <tr th:each="empresa, i : ${empresas}">
                     <th scope="row" th:text="${i.index + 1}"></th>
-                    <td th:text="${nota.id_empresa}"></td>
-                    <td th:text="${nota.periodo}"></td>
-                    <td th:text="${nota.numeroNota}"></td>
-                    <td th:text="${nota.tipoNota}"></td>
+                    <td th:text="${empresa.id}"></td>
+                    <td th:text="${empresa.nome}"></td>
+                    <td th:text="${empresa.pontuacao}"></td>
                 </tr>
                 </tbody>
             </table>
         </div>
     </div>
     <a th:href="@{/}" class="btn btn-primary btn-lg btn-block">Importar outro arquivo</a>
-    <a th:href="@{/ranking}" class="btn btn-primary btn-lg btn-block">Ranking de Empresas</a>
 </div>
 
 </body>

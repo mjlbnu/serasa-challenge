@@ -37,31 +37,31 @@ public class UploadController {
 	@PostMapping("/upload-notas")
 	public void UploadNotas(@RequestParam("file") MultipartFile file, Model model, @ModelAttribute Empresa empresa) {
 
-		// validate file
+		// validação
 		if (file.isEmpty()) {
-			model.addAttribute("message", "Selecione um arquivo CSV para upload");
+			model.addAttribute("message", "Selecione um arquivo CSV válido para upload");
 			model.addAttribute("status", false);			
 		} else {
 
-			// parse CSV file to create a list of `Operacoes` objects
+			// faz o parse do arquivo CSV para criar uma lista de NOTAS 
 			try (Reader reader = new BufferedReader(new InputStreamReader(file.getInputStream()))) {
 
-				// create csv bean reader
+				// cria o csv bean reader
 				@SuppressWarnings({ "unchecked", "rawtypes" })
 				CsvToBean<Nota> csvToBean = new CsvToBeanBuilder(reader).withType(Nota.class)
 						.withIgnoreLeadingWhiteSpace(true).build();
 
-				// convert `CsvToBean` object to list of notas
+				// converte `CsvToBean` objeto para uma lista de Notas
 				List<Nota> notas = csvToBean.parse();
 				
 				for (Nota nota : notas) {
 					nota.setId_empresa(empresa.getId());
 				}
 
-				// save notas on db
+				// salva as notas no bd
 				notaService.gravarNotas(notas);
 
-				// save notas on list on model
+				// salva as Notas em uma lista no model
 				model.addAttribute("notas", notas);
 				model.addAttribute("status", true);
 

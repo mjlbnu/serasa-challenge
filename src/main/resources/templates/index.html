@@ -30,8 +30,10 @@
                     <label for="file">Selecione o arquivo CSV contendo as notas</label>
                     <input type="file" name="file" class="form-control-file" id="file" accept=".csv">
                 </div>
-                <button type="submit" class="btn btn-primary">Importar Notas</button>
+                <button type="submit" class="btn btn-warning btn-lg btn-block">Importar Notas</button>
             </form>
+            <hr>
+    		<a th:href="@{/ranking}" class="btn btn-primary btn-lg btn-block">Ranking de Empresas</a>
         </div>
     </div>
 </div>

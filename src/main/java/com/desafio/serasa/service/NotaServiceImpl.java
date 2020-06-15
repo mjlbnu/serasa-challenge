@@ -15,12 +15,6 @@ public class NotaServiceImpl implements NotaServiceInterface{
 	private NotaRepository notaRepository;
 
 	@Override
-	public Integer atualizarRankingEmpresa(Long id_empresa) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public void gravarNotas(List<Nota> notas) {
 		notaRepository.saveAll(notas);
 	}
