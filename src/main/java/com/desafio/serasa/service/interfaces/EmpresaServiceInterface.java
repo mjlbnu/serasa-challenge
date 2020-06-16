@@ -1,4 +1,4 @@
-package com.desafio.serasa.service;
+package com.desafio.serasa.service.interfaces;
 
 import java.util.List;
 
@@ -8,6 +8,6 @@ public interface EmpresaServiceInterface {
 	
 	List<Empresa> listar();
 	
-	void calcularNotaEmpresa(Long id);
+	void reCalcularNotaEmpresa(Long id);
 
 }

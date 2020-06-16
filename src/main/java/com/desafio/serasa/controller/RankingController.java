@@ -8,15 +8,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.desafio.serasa.entity.Empresa;
-import com.desafio.serasa.service.EmpresaServiceImpl;
+import com.desafio.serasa.service.EmpresaService;
 
 
 @Controller
 public class RankingController {
 	
 	@Autowired
-	EmpresaServiceImpl empresaService;
-
+	EmpresaService empresaService;
 	
 	@GetMapping("/ranking")
 	public void CarregaRanking(Model model) {

@@ -1,5 +1,7 @@
 package com.desafio.serasa.entity;
 
+import java.math.BigDecimal;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -20,13 +22,13 @@ public class Empresa {
 	@Column
 	@NotNull
 	@Size(max = 100, min = 1)
-	private Float pontuacao;
+	private BigDecimal pontuacao;
 	
 	public Empresa() {
 	}
 
 	public Empresa(Long id, @NotNull @Size(max = 100) String nome,
-			@NotNull @Size(max = 100, min = 1) Float pontuacao) {
+			@NotNull @Size(max = 100, min = 1) @NotNull @Size(max = 100, min = 1) BigDecimal pontuacao) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -49,11 +51,11 @@ public class Empresa {
 		this.nome = nome;
 	}
 	
-	public Float getPontuacao() {
+	public BigDecimal getPontuacao() {
 		return pontuacao;
 	}
 
-	public void setPontuacao(Float pontuacao) {
+	public void setPontuacao(BigDecimal pontuacao) {
 		this.pontuacao = pontuacao;
 	}
 

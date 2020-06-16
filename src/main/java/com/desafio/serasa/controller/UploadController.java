@@ -16,8 +16,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.desafio.serasa.entity.Empresa;
 import com.desafio.serasa.entity.Nota;
-import com.desafio.serasa.service.EmpresaServiceImpl;
-import com.desafio.serasa.service.NotaServiceImpl;
+import com.desafio.serasa.service.EmpresaService;
+import com.desafio.serasa.service.NotaService;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
 
@@ -25,10 +25,10 @@ import com.opencsv.bean.CsvToBeanBuilder;
 public class UploadController {
 	
 	@Autowired
-	NotaServiceImpl notaService;
+	NotaService notaService;
 	
 	@Autowired
-	EmpresaServiceImpl empresaService;
+	EmpresaService empresaService;
 
 	@GetMapping("/")
 	public String index(Model model) {
@@ -66,7 +66,7 @@ public class UploadController {
 				notaService.gravarNotas(notas);
 				
 				// Atualiza a nota da empresa
-				empresaService.calcularNotaEmpresa(empresa.getId());
+				empresaService.reCalcularNotaEmpresa(empresa.getId());
 
 				// salva as Notas em uma lista no model
 				model.addAttribute("notas", notas);
