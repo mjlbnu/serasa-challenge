@@ -1,6 +1,8 @@
 package com.desafio.serasa.service;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,57 +32,67 @@ public class EmpresaService implements EmpresaServiceInterface {
 	@Override
 	public void reCalcularNotaEmpresa(Long id) {
 		
-		BigDecimal pcFISCAL = new BigDecimal("0.02");
-		BigDecimal pcDEBITO = new BigDecimal("0.04");
+		final BigDecimal PERCENTUAL_FISCAL = new BigDecimal("0.02");
+		final BigDecimal PERCENTUAL_DEBITO = new BigDecimal("0.04");
 		
-		// busca a pontuação atual da empresa
+		// Busca a pontuação atual da empresa
 		Empresa empresa = empresaRepository.findById(id).get();
 		BigDecimal pontuacaoAtual = empresa.getPontuacao();
 		
-		// seleciona as notas PENDENTES
+		// Busca as notas PENDENTES
 		List<Nota> notasFiscais = notaRepository.buscarNotasPendentesPorTipo(id, "FISCAL", "PENDENTE");
 		List<Nota> notasDebito = notaRepository.buscarNotasPendentesPorTipo(id, "DEBITO", "PENDENTE");
 		
-		for (Nota nota : notasFiscais) {
-			pontuacaoAtual = pontuacaoAtual.add(pontuacaoAtual.multiply(pcFISCAL).setScale(2));
-			pontuacaoAtual = pontuacaoAtual.setScale(0, BigDecimal.ROUND_DOWN);
-			System.out.println(pontuacaoAtual);
-		}
+		pontuacaoAtual = processaNotas(notasFiscais, RoundingMode.HALF_DOWN,
+				PERCENTUAL_FISCAL, pontuacaoAtual, "FISCAL");
 		
-		/*
-		System.out.println("subtract:");
-		// diminui uma de débito
-		pontuacaoAtual = pontuacaoAtual.subtract(pontuacaoAtual.multiply(pcDEBITO).setScale(2));
-		pontuacaoAtual = pontuacaoAtual.setScale(0, BigDecimal.ROUND_UP);
-		System.out.println(pontuacaoAtual);
-		*/
+		pontuacaoAtual = processaNotas(notasDebito, RoundingMode.HALF_UP,
+				PERCENTUAL_DEBITO, pontuacaoAtual, "DEBITO");
 		
-		for (Nota nota : notasDebito) {
-			pontuacaoAtual = pontuacaoAtual.subtract(pontuacaoAtual.multiply(pcDEBITO).setScale(2));
-			pontuacaoAtual = pontuacaoAtual.setScale(0, BigDecimal.ROUND_UP);
-			System.out.println(pontuacaoAtual);
-		}
-		
-		BigDecimal limiteSuperior = new BigDecimal("100");
-		BigDecimal limiteInferior = new BigDecimal("1");
-		
-		// > 100
-		if(pontuacaoAtual.compareTo(limiteSuperior) == 1) {
-			pontuacaoAtual = limiteSuperior;
-		}
-		
-		// < 1
-		if(pontuacaoAtual.compareTo(limiteInferior) == -1) {
-			pontuacaoAtual = limiteInferior;
-		}
-		
-		System.out.println("--------------");
-		System.out.println(empresa.getNome() + ": " + pontuacaoAtual);
+		pontuacaoAtual = verificaLimitesPontuacao(pontuacaoAtual);
 		
 		// salva a nova pontuação da empresa
-		
-		// redireciona para o ranking
-		
+		empresa.setPontuacao(pontuacaoAtual);
+		empresaRepository.save(empresa);
 	}
 
+	private BigDecimal verificaLimitesPontuacao(BigDecimal pontos) {
+		final BigDecimal LIMITE_SUPERIOR = new BigDecimal("100");
+		final BigDecimal LIMITE_INFERIOR = new BigDecimal("1");
+		
+		// > 100
+		if (pontos.compareTo(LIMITE_SUPERIOR) == 1) {
+			pontos = LIMITE_SUPERIOR;
+		}
+
+		// < 1
+		if (pontos.compareTo(LIMITE_INFERIOR) == -1) {
+			pontos = LIMITE_INFERIOR;
+		}
+		
+		return pontos;
+	}
+	
+	private BigDecimal processaNotas(List<Nota> notas, RoundingMode roundingMode,
+			BigDecimal percentual, BigDecimal pontuacaoAtual, String tipoNota) {
+		for (Nota nota : notas) {
+			BigDecimal valorPercentual = pontuacaoAtual.multiply(percentual);
+			System.out.println("valorPercentual: " + valorPercentual);
+				
+			BigDecimal valorOperacao = tipoNota.equalsIgnoreCase("FISCAL") 
+					? pontuacaoAtual.add(valorPercentual)
+					: pontuacaoAtual.subtract(valorPercentual);
+			System.out.println("pontuacaoAtual: " + pontuacaoAtual);
+			
+			BigDecimal arred = valorOperacao.round(new MathContext(4, roundingMode));
+			pontuacaoAtual = arred;
+			System.out.println("pontuacaoAtual: " + pontuacaoAtual);
+			
+			nota.setStatus("PROCESSADA");
+			notaRepository.save(nota);
+		}
+		return pontuacaoAtual;
+	}
+	
+	
 }

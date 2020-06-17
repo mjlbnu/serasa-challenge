@@ -65,7 +65,7 @@ public class UploadController {
 				// salva as notas no bd
 				notaService.gravarNotas(notas);
 				
-				// Atualiza a nota da empresa
+				// Calcula e atualiza a nota da empresa
 				empresaService.reCalcularNotaEmpresa(empresa.getId());
 
 				// salva as Notas em uma lista no model

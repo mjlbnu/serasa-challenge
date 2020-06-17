@@ -35,7 +35,7 @@
                     <th scope="row" th:text="${i.index + 1}"></th>
                     <td th:text="${empresa.id}"></td>
                     <td th:text="${empresa.nome}"></td>
-                    <td th:text="${empresa.pontuacao}"></td>
+                    <td th:text="${#numbers.formatInteger(empresa.pontuacao,1)}"></td>
                 </tr>
                 </tbody>
             </table>
