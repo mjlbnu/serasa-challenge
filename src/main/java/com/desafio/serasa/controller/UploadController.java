@@ -44,10 +44,10 @@ public class UploadController {
 		// validação
 		if (file.isEmpty()) {
 			model.addAttribute("message", "Selecione um arquivo CSV válido para upload");
-			model.addAttribute("status", false);			
+			model.addAttribute("status", false);
 		} else {
 
-			// faz o parse do arquivo CSV para criar uma lista de NOTAS 
+			// faz o parse do arquivo CSV para criar uma lista de NOTAS
 			try (Reader reader = new BufferedReader(new InputStreamReader(file.getInputStream()))) {
 
 				// cria o csv bean reader
@@ -57,14 +57,14 @@ public class UploadController {
 
 				// converte `CsvToBean` objeto para uma lista de Notas
 				List<Nota> notas = csvToBean.parse();
-				
+
 				for (Nota nota : notas) {
 					nota.setId_empresa(empresa.getId());
 				}
 
 				// salva as notas no bd
 				notaService.gravarNotas(notas);
-				
+
 				// Calcula e atualiza a nota da empresa
 				empresaService.reCalcularNotaEmpresa(empresa.getId());
 

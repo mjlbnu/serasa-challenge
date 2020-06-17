@@ -77,16 +77,13 @@ public class EmpresaService implements EmpresaServiceInterface {
 			BigDecimal percentual, BigDecimal pontuacaoAtual, String tipoNota) {
 		for (Nota nota : notas) {
 			BigDecimal valorPercentual = pontuacaoAtual.multiply(percentual);
-			System.out.println("valorPercentual: " + valorPercentual);
 				
 			BigDecimal valorOperacao = tipoNota.equalsIgnoreCase("FISCAL") 
 					? pontuacaoAtual.add(valorPercentual)
 					: pontuacaoAtual.subtract(valorPercentual);
-			System.out.println("pontuacaoAtual: " + pontuacaoAtual);
 			
 			BigDecimal arred = valorOperacao.round(new MathContext(4, roundingMode));
 			pontuacaoAtual = arred;
-			System.out.println("pontuacaoAtual: " + pontuacaoAtual);
 			
 			nota.setStatus("PROCESSADA");
 			notaRepository.save(nota);
